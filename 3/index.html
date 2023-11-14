@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+    <!--landing page example-->
+    <title>Ebook Landing Page - by Filippi Albuquerque [Infographic]</title>
+
+    <meta charset="utf-8">
+                        <meta name="robots" content="noindex">
+            
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta property="og:url" content="" />
+    <meta property="og:title" content="" />
+    <meta property="og:type" content="website" />
+    <meta property="og:description" content="&nbsp;" />
+    <meta property="og:image" content="http://" />
+    <meta property="og:image:secure_url" content="https://" />
+    <meta property="og:image:width" content="" />
+    <meta property="og:image:height" content="" />
+
+    <link rel="shortcut icon" type="image/png" href="/media/v2_img/icon-blue.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+
+    <link rel="stylesheet" href="/js/bootstrap-3.2.0/css/bootstrap.min.css">
+    <!-- Sentry.io -->
+    
+<script
+    src="https://browser.sentry-cdn.com/5.16.1/bundle.min.js"
+    integrity="sha384-XeIbINcUQP10HtmVHwZigannjNDpoQRe+uhAoW9J5HU5dHFpilP164LjqO78xtIB"
+    crossorigin="anonymous"></script>
+<script>
+    (function(){
+        var locale = (window.navigator.userLanguage
+            || (window.navigator.languages && window.navigator.languages[0])
+            || 'en'
+        ).replace(/-.*/i, '');
+        var sentryPlanType = 'Free';
+        if (1 === 2) {
+            sentryPlanType = 'Premium';
+        } else if (0 === 1) {
+            sentryPlanType = 'Education';
+        } else if (0 === 3) {
+            sentryPlanType = 'Business';
+        }
+        try {
+            Sentry.init({
+                dsn: "https://0eba565c0585430890738e666dde537e@sentry.io/104247",
+                release: "23.45.0",
+                environment: "production",
+                enabled: "production" !== 'development', // disable Sentry for local development
+                beforeSend(event, hint) {
+                    // We can do things to the event here
+                    // Filter certain variables, add some, change the footprint to allow better grouping etc.
+                    // Sentry groups by looking at stack trace first, then exception, and then the error message
+                    // If we don't have sourcemaps uploaded to sentry, this ^ grouping isn't very effective
+                    // Also some events include release number and are therefore grouped as different issues
+                    // even if they're the same. By adjusting the event footprint, we can better group them.
+                    if (event.exception && false) {
+                        // We can show the user a modal for them to give us a short description of what happened
+                        // The copy in the modal is customizable using this function, the style can be overwritten
+                        // in Venngage.css. Alternatively we can create our own modal and use their API to send reports
+                        Sentry.showReportDialog({
+                            eventId: event.event_id,
+                            user: {
+                                name: "Filippi Albuquerque",
+                                email: "filippialbuquerque@gmail.com",
+                            },
+                            title: 'Oh no! Something went wrong.',
+                            labelSubmit: 'Submit Report',
+                            successMessage: 'Your feedback has been sent. Thank you! Please refresh your page.'
+                        });
+                    }
+                    return event;
+                },
+                beforeBreadcrumb(breadcrumb, hint) {
+                    if (breadcrumb.category === 'xhr') {
+                        // We can also modify breadcrumbs to make them more useful. By default, Sentry gathers things like
+                        // user clicks for example, we can find those and label them in a more descriptive way or block
+                        // some breadcrumbs altogether
+                        var responseUrl = hint.xhr.responseURL;
+                        // I'm blocking the mixpanel xhr requests because they aren't helpful at all
+                        // Instead I'm adding a more meaningful mixpanel breadcrumb in the analytic/mixpanel function
+                        if (/\bhttps:\/\/api-js.mixpanel.com\b/.test(responseUrl)) {
+                            return null;
+                        }
+                    }
+                    return breadcrumb;
+                },
+                // Allows us to allow events from these urls only
+                whitelistUrls: [
+                ],
+                // Allows us to block specific urls from sending events to Sentry
+                blacklistUrls: [
+                    // Saved html pages on user devices
+                    /file.*/
+                ],
+                // Allows us to block specific errors from being sent to Sentry
+                ignoreErrors: [
+                ]
+            })
+            Sentry.configureScope(function(scope) {
+                // Add user specific attributes that are searchable by Sentry
+                scope.setUser({
+                    'id': "19788955",
+                });
+                // Tags are key: value pairs that are searchable by Sentry
+                // For example we can add plan type for better prioritization
+                // We can also add all feature flags for this user
+                scope.setTag('plan', sentryPlanType);
+                scope.setTag('admin', 1 === 3);
+                // Provides extra information available on the issue page
+                // to give more context, but not searchable on Sentry
+                scope.setExtra('locale', locale);
+            });
+        } catch (err) {
+            console.log('Sentry is not defined');
+        }
+    })();
+</script>
+
+    <style>
+    html > body {
+        background-color: #35363A;
+    }
+
+    #MultipageOptions {
+        margin-top: 60px;
+    }
+
+    footer {
+        padding-bottom: 80px;
+        width: 816px;
+        max-width: 100%;
+        margin: 0 auto;
+    }
+
+    #footer-container {
+        display: flex;
+        background-color: #4D4D53;
+        height: 60px;
+        border-radius: 10px;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 30px;
+    }
+
+    #footer-container > * {
+        font-family: Inter, Oxygen, Helvetica, Arial, sans-serif;
+        color: #FFFFFF;
+        font-size: 16px;
+        margin-bottom: 0;
+    }
+
+    #footer-container > a {
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        font-weight: 300;
+    }
+
+    #footer-container > a:hover {
+        text-decoration: none;
+    }
+
+    #copyright {
+        font-family: Inter, Oxygen, Helvetica, Arial, sans-serif;
+        font-size: 14px;
+        color: #FFFFFF;
+        text-align: center;
+        margin-top: 2rem;
+    }
+
+    a#dmca-terms {
+        font-family: Inter, Oxygen, Helvetica, Arial, sans-serif;
+        color: #FFF;
+        font-weight: 400;
+        text-align: center;
+        display: block;
+        text-decoration: underline;
+    }
+</style>
+</head>
+
+<body>
+                    
+                    <div class="panels" id="publish_page_container">
+    
+                <div id="published_infographic_container">
+            <div id="published_infographic">
+                <div id="WidgetLayer" style="width: 100%; height: 100%; position: absolute;"></div>
+                <div id="widget_container"></div>
+                <div
+                    id='page_number'
+                                        style="display: none"
+                    >
+                    
+                </div>
+                <div id="pages_container"></div>
+            </div>
+            <div id="MultipageOptions"></div>
+        </div>
+
+        <footer>
+            <div id="footer-container">
+                <p id="created-by">
+                    Created by Filippi A
+                </p>
+                <a id="report_link" href="https://venngage.typeform.com/to/xOUCTk?referrer=" target="_blank" data-vg-test-label="report-link">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4.16732 4.16699V16.667" stroke="white" stroke-linecap="round"/>
+                        <path d="M4.16602 4.99967C4.16602 4.99967 5.62435 3.33301 7.81185 3.33301C9.99935 3.33301 11.666 4.99967 13.3327 4.99967C14.9994 4.99967 15.8327 4.16634 15.8327 4.16634" stroke="white" stroke-linecap="round"/>
+                        <path d="M4.16602 12.5003C4.16602 12.5003 5.62435 10.8337 7.81185 10.8337C9.99935 10.8337 11.666 12.5003 13.3327 12.5003C14.9994 12.5003 15.8327 11.667 15.8327 11.667V4.16699" stroke="white" stroke-linecap="round"/>
+                    </svg>&nbsp;
+                    Report                </a>
+            </div>
+            <p id="copyright">
+                Copyright 2023 Venngage Inc.
+            </p>
+
+            <a id="dmca-terms" target="_blank" href="https://help.venngage.com/hc/en-us/articles/11017142376205-Venngage-Digital-Millennium-Copyright-Act-DMCA-Policy" data-vg-test-label="dcma-policy-link">
+                DMCA Policy            </a>
+        </footer>
+
+                        </div>
+    
+                
+                    
+        <script type="text/javascript">
+    (function(e,a){if(!a.__SV){var b=window;try{var c,l,i,j=b.location,g=j.hash;c=function(a,b){return(l=a.match(RegExp(b+"=([^&]*)")))?l[1]:null};g&&c(g,"state")&&(i=JSON.parse(decodeURIComponent(c(g,"state"))),"mpeditor"===i.action&&(b.sessionStorage.setItem("_mpcehash",g),history.replaceState(i.desiredHash||"",e.title,j.pathname+j.search)))}catch(m){}var k,h;window.mixpanel=a;a._i=[];a.init=function(b,c,f){function e(b,a){var c=a.split(".");2==c.length&&(b=b[c[0]],a=c[1]);b[a]=function(){b.push([a].concat(Array.prototype.slice.call(arguments,
+    0)))}}var d=a;"undefined"!==typeof f?d=a[f]=[]:f="mixpanel";d.people=d.people||[];d.toString=function(b){var a="mixpanel";"mixpanel"!==f&&(a+="."+f);b||(a+=" (stub)");return a};d.people.toString=function(){return d.toString(1)+".people (stub)"};k="disable time_event track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config reset people.set people.set_once people.unset people.increment people.append people.union people.track_charge people.clear_charges people.delete_user".split(" ");
+    for(h=0;h<k.length;h++)e(d,k[h]);a._i.push([b,c,f])};a.__SV=1.2;b=e.createElement("script");b.type="text/javascript";b.async=!0;b.src="undefined"!==typeof MIXPANEL_CUSTOM_LIB_URL?MIXPANEL_CUSTOM_LIB_URL:"file:"===e.location.protocol&&"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js".match(/^\/\//)?"https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js":"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js";c=e.getElementsByTagName("script")[0];c.parentNode.insertBefore(b,c)}})(document,window.mixpanel||[]);
+        mixpanel.init('1c26d722c8b30acaa938e43c895a2411', {
+            loaded: function (mixpanel) { 
+                var email = "filippialbuquerque@gmail.com";
+                if (email !== "") {
+                    mixpanel.identify(email);
+                }
+            }
+        });
+</script>
+
+    <link rel="stylesheet" href="https://cdn.venngage.com/23.45.0/1ae6b8563e774e03fb334379835ce6ddd558bbad/infograph/core/venngage.css?v=23.45.0" />
+
+    <script type="text/javascript" charset="utf-8" src="/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/js/jquery-migrate-1.2.1.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/js/bootstrap-3.2.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/js/jquery-ui-1.11.4/jquery-ui.min.js"></script>
+    <script type='text/javascript' charset="utf-8" src='/media/utils/map_data_script.js'></script>
+
+        <script type="text/javascript">
+        var __vg_config = window.__vg_config || {
+            env: 'production',
+            api: {
+                endpoint: {
+                    'ADD_COMMENT': '/rest/comments/add_comment',
+                    'GET_COMMENTS': '/rest/comments/get_infographic_comments',
+                    'CHECK_SHARE_STATUS': '/share_status',
+                    'SHARE_WITH_TEAM': '/infographic/share/with_team',
+                }
+            },
+            user: {
+                id: '19788955',
+                teamId: null,
+                firstName: 'Filippi',
+                lastName: 'Albuquerque',
+                isBusiness: false,
+                isBusinessFree: false,
+                isEnterprise: false,
+                hasTeamMember: false,
+                teamName: "",
+                isInfographOwner: true
+            },
+            newDomainUrl: "https:\/\/infograph.venngage.com",
+            assetsDomain: "https:\/\/cdn.venngage.com\/23.45.0\/1ae6b8563e774e03fb334379835ce6ddd558bbad",
+            __init_redux__: {
+                showLoginPrompt: false,
+            }
+        };
+    </script>
+                <script>
+        // Legacy global config
+        var isMultipage = true;
+        var users_infographs_list = [];
+        var iconMediaBucket = 's3.amazonaws.com/media.venngage.com/icons/v1/';
+        var userMediaBucket = 'user-media.venngage.com';
+        var imageSearchLibraryBucket = 'image-library.venngage.com';
+        var vidaIntegrationBucket = 'vida-integration.venngage.com';
+        var mode = 'readonly';
+        var zoom = false;
+        var animate = true;
+        var enableInteraction = true;
+        var snapToGrid = false;
+        var snapToGuide = false;
+        var VGLibrary = VGLibrary || {};
+        var accessToken = '';
+        var accessTokenType = '';
+        var isBleedMarksOn = '';
+        var isPreview = '1';
+
+        // Feature Flag
+        var enable_richtext_widget = true;
+        //FF for request edit in preview page
+        var enable_prompt_admin_to_upgrade = false;
+
+        // For rendering CTA overlay
+        var showCTAPopup = false;
+        // array of page ids used to validate page hyperlinks
+        var documentPages = ["3c370f9d-5c73-4574-a25d-29a2a47b202b"];
+
+        var enable_granular_share_modal = false;
+
+        // Enable notify team when design is shared
+        var enable_notify_email_share = false;
+
+        VGLibrary.icons = {};
+        VGLibrary.helpers = {};
+        VGLibrary.deprecateIcons = {};
+        VGLibrary.iconMediaBucket = iconMediaBucket;
+    </script>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+
+<!-- Load latin fonts -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abel:400|Abril+Fatface:400|Aldrich:400|Alegreya:400,700,400i,700i|Alfa+Slab+One:400|Allerta+Stencil:400|Amaranth:400,700,400i,700i|Anton:400|Archivo+Black:400|Archivo+Narrow:400,700,400i,700i|Arimo:400,700,400i,700i|Arvo:400,700,400i,700i|Asap:400|Averia+Libre:400,700,400i,700i|Averia+Sans+Libre:400,700,400i,700i|Averia+Serif+Libre:400,700,400i,700i|Bangers:400|Berkshire+Swash:400|Cabin:400,700,400i,700i|Chewy:400|Cinzel:400,700|Codystar:400|Contrail+One:400|Coustard:400|Didact+Gothic:400|Dosis:400,700|EB+Garamond:400|Economica:400,700,400i,700i|Expletus+Sans:400,700,400i,700i|Fredericka+the+Great:400|Fredoka+One:400|Graduate:400|Grand+Hotel:400|Great+Vibes:400|Josefin+Sans:400,700,400i,700i|Josefin+Slab:400,700,400i,700i|Julius+Sans+One:400|Karla:400,700,400i,700i|Knewave:400|Lato:400,700,400i,700i|Limelight:400|Lobster+Two:400,700,400i,700i|Lora:400,700,400i,700i|Lustria:400|Merriweather:400,700,400i,700i|Monoton:400|Montserrat:400,700|Muli:400,700,400i,700i|News+Cycle:400,700|Nixie+One:400|Nunito:400,700|Old+Standard+TT:400,700,400i,700i|Open+Sans:400,700,400i,700i|Oswald:400,700|Overlock:400,700,400i,700i|Oxygen:300,400,700|Pacifico:400|Pathway+Gothic+One:400|Paytone+One:400|Petit+Formal+Script:400|Philosopher:400,700,400i,700i|Playball:400|Playfair+Display:400,700,400i,700i|Poiret+One:400|Poppins:400,700|Questrial:400|Quicksand:400|Raleway:400,700,400i,700i|Roboto:400,700,400i,700i|Roboto+Condensed:400,700,400i,700i|Roboto+Slab:400,700|Rochester:400|Rozha+One:400|Rye:400|Satisfy:400|Share:400,700,400i,700i|Simonetta:400,700,400i,700i|Sintony:400,700&subset=all" />
+<!-- Load 2nd batch of Latin fonts -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Six+Caps:400|Source+Sans+Pro:400,700,400i,700i|Ubuntu+Mono:400,700,400i,700i|Ultra:400|Unkempt:400,700|Unica+One:400|Varela+Round:400|Vast+Shadow:400|Vidaloka:400|Voltaire:400|VT323:400|Wire+One:400|Yellowtail:400|Fira+Sans:400,700,400i,700i|Kanit:400,700,400i,700i|Lateef:400|Amiri:400,700,400i,700i|Tajawal:400,700|Mirza:400,700|Scheherazade:400,700|Just+Another+Hand:400|Fjalla+One:400|Kaushan+Script:400|Rubik+Mono+One:400|Exo:400,700,400i,700i|Ubuntu:400,700,400i,700i|Amatic+SC:400,700|Assistant:400|Cairo:400,700|Comfortaa:400,700|Inter:400,700,400i,700i|Itim:400|Happy+Monkey:400|Heebo:400,700|Lalezar:400|Maven+Pro:400,700|Mitr:400,700|Pattaya:400|Permanent+Marker:400|Prompt:400,700,400i,700i|Rubik:400,700,400i,700i|Titillium+Web:400,700,400i,700i|Trirong:400|Baloo+Thambi:400|Barlow+Condensed:400|Cabin+Sketch:400|Courgette:400|Dancing+Script:400|Fascinate+Inline:400|Indie+Flower:400|Kalam:400|Libre+Baskerville:400|Libre+Franklin:400|Patrick+Hand:400|PT+Sans:400|PT+Sans+Narrow:400|PT+Serif:400|Raleway+Dots:400|Ribeye+Marrow:400|Shrikhand:400|Sue+Ellen+Francisco:400|Quantico:400|Palanquin:400&subset=all" />
+
+<!-- Load thai fonts -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Kanit:400,700,400italic,700italic&subset=all" />
+<!-- Load arabic fonts -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lateef|Amiri:400,700,400italic,700italic|Tajawal:400,700|Mirza:400,700|Scheherazade:400,700&subset=all" />
+<!-- Load cyrillic fonts -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Sans:400,700,400italic,700italic&subset=all" />
+<!-- Load chinese fonts -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+SC:400,700,400i,700i&subset=all" />
+
+<!-- Load default fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet">
+
+<!-- Load custom fonts -->
+    <link rel="stylesheet" href="https://infograph.venngage.com/rest/customfonts/css?user_id=19788955" media="all">
+
+<!-- Load generic fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=" media="all">
+
+<!-- Load manual generic fonts -->
+    <link rel="stylesheet" href="https://infograph.venngage.com/rest/genericfonts/css" media="all">
+
+    <script type="text/javascript" charset="utf-8" src="https://cdn.venngage.com/23.45.0/1ae6b8563e774e03fb334379835ce6ddd558bbad/infograph/core/libs.min.js?v=23.45.0"></script>
+
+    <script type="text/javascript" charset="utf-8" src="https://cdn.venngage.com/23.45.0/1ae6b8563e774e03fb334379835ce6ddd558bbad/infograph/core/core.min.js?v=23.45.0"></script>
+
+
+        <script id="__defaultConfig" type="application/json">
+        {"infographicContainer":"#published_infographic_container","pageContainer":"#published_infographic","widgetContainer":"#widget_container","widgetLayer":"#WidgetLayer","bleedMarks":false,"mode":"readonly","interaction":true}
+    </script>
+    
+    <script id="infographicMetadata" type="application/json">
+        {"id":"e632a282-ee91-46f4-a5e8-76d251f6c1fd","title":"Ebook Landing Page","width":1280,"height":1000,"pages":["3c370f9d-5c73-4574-a25d-29a2a47b202b"],"useCleanCssInRichText":true,"isEmbed":false,"private_link_id":"J4Oxf2hGzwA","source_id":"34cc19d2-6f7f-43c5-a87f-a7488d362647","source_type":"template"}
+    </script>
+
+        <script type="text/javascript">
+        var __vg_config = window.__vg_config || {
+            env: 'production',
+            api: {
+                endpoint: {
+                    'ADD_COMMENT': '/rest/comments/add_comment',
+                    'GET_COMMENTS': '/rest/comments/get_infographic_comments',
+                    'CHECK_SHARE_STATUS': '/share_status',
+                    'SHARE_WITH_TEAM': '/infographic/share/with_team',
+                }
+            },
+            user: {
+                id: '19788955',
+                teamId: null,
+                firstName: 'Filippi',
+                lastName: 'Albuquerque',
+                isBusiness: false,
+                isBusinessFree: false,
+                isEnterprise: false,
+                hasTeamMember: false,
+                teamName: "",
+                isInfographOwner: true
+            },
+            newDomainUrl: "https:\/\/infograph.venngage.com",
+            assetsDomain: "https:\/\/cdn.venngage.com\/23.45.0\/1ae6b8563e774e03fb334379835ce6ddd558bbad",
+            __init_redux__: {
+                showLoginPrompt: false,
+            }
+        };
+    </script>
+    
+    <script id="previewMode" type="application/json">
+        true
+    </script>
+
+    <script type="text/javascript" charset="utf-8" src="https://cdn.venngage.com/23.45.0/1ae6b8563e774e03fb334379835ce6ddd558bbad/vendor.bundle.js?v=23.45.0"></script>
+    <script type="text/javascript" charset="utf-8" src="https://cdn.venngage.com/23.45.0/1ae6b8563e774e03fb334379835ce6ddd558bbad/widgets/js/widgets.bundle.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var page = VGLibrary.presentation.getActivePage();
+            var container = document.getElementById("published_infographic");
+
+            var height = (window.innerWidth / page.getBoundingClientRect().width) * page.getBoundingClientRect().height;
+
+            if (!!$('#report_link').length) {
+                // Pass the full url of published or shared infographic to typeform's hidden field.
+                var referrerUrl = $('#report_link').attr('href') + window.location.href;
+                $('#report_link').attr('href', referrerUrl);
+            }
+
+            var TRACK_VIEW_TIMEOUT = 15 * 1000; // Track view after 15 seconds to prevent bots from adding to view count.
+            setTimeout(() => {
+                $.ajax({
+                    type: "POST",
+                    url: '/track_view/e632a282-ee91-46f4-a5e8-76d251f6c1fd',
+                })
+                .fail(function(resp) {
+                    console.error(resp);
+                });
+            }, TRACK_VIEW_TIMEOUT)
+        });
+        var VGEditor = {
+            renderTextV5: function(settings, element, widgetId) {
+                window.widgets.renderTextV5(settings, element);
+            },
+            richText: {
+                render: function (widget) {
+                    window.widgets.renderRichText(widget);
+                },
+                useCleanCss: JSON.parse('true'),
+            },
+            smartWidget: {
+                render: function (widget) {
+                    const page = VGLibrary.presentation.getActivePage();
+
+                    // Sync the width of the widget on the first render for preview
+                    // It will run only for the case that doesn't have any styling applied after the first creation
+                    if (widget.data.type === 'HeaderFooter') {
+                        if (widget.data.content[0].minWidth !== widget.data.content[0].dimension.width) {
+                            widget.data.content[0].minWidth = widget.data.content[0].dimension.width;
+                        }
+                    }
+
+                    window.widgets.renderSmartWidget(widget);
+
+                    if (window.widgets.isSmartWidget(widget)) {
+                        const widgetContainer = document.querySelector(`[data-id="${widget.identifier}"]`);
+
+                        if (! widgetContainer) {
+                            return;
+                        }
+
+                        page.widget_map[widget.identifier] = widgetContainer;
+                    }
+                },
+            },
+            widgetCanvas: {
+                render: function () {
+                    window.widgets.renderWidgetCanvas();
+                },
+                resizeCanvas: function () {
+                    window.widgets.resizeCanvas();
+                },
+            }
+        };
+
+        if (VGEditor.widgetCanvas) {
+            VGEditor.widgetCanvas.render();
+            VGEditor.widgetCanvas.resizeCanvas();
+        }
+
+        if (location.pathname.startsWith('/pl')) {
+            mixpanel.track('Load Private Link');
+        }
+    </script>
+
+    <!-- This script have to run at the end of this, because it calls the widget.load event bus. -->
+    <script type="text/javascript" charset="utf-8" src="https://cdn.venngage.com/23.45.0/1ae6b8563e774e03fb334379835ce6ddd558bbad/presentation/js/presentation.bundle.js"></script>
+
+    
+    <script>
+    try {
+        /*
+        * Adapter class between jquery infographic renderer and React Comments
+        */
+        var VGComments = {
+            // whether comments are enabled for the user.
+            commentsEnabled: false,
+            // whether comments are showing at the moment for the user. default = false
+            commentsShowing: false,
+            // max screen width the comment box should be visible
+            maxScreenWidthVisible: 768,
+            // whether the comment sendbox is in focus. used to disable key presses for multipageoptions
+            isSendBoxInFocus: false, // TODO: ideally move this state to the store redux.
+
+            /**
+             * Get if the comments are currently open
+             *
+             * @return bool Are the comments open.
+             */
+            getIsCommentsShowing: function() {
+                return this.commentsShowing;
+            },
+            /**
+             * Update whether comments are showing to the user.
+             * Another redux state stores whether the user open/closed the comments.
+             * These two states are different to remember the previous state before hiding comments on mobile.
+             * @param bool state The new state of whether the comments are now showing
+             */
+            updateIsCommentsShowing: function(state) {
+                this.commentsShowing = state;
+                this.updateInfographicWidth();
+                if (('forcePageResize' in window) === false) {
+                    throw("cannot resize page container");
+                }
+                window.forcePageResize();
+            },
+            /**
+             * Initializes necessary forced styling on the publish page container when comments are enabled
+             */
+            initializeInfographicStyling: function() {
+                $("#publish_page_container").css("position", "relative");
+                $("#publish_page_container").css("display", "inline-block");
+
+                this.updateInfographicWidth();
+
+            },
+            /**
+             * Forces necessary styling on the publish page container when screen sizes are changed
+             * @return none
+             */
+            updateInfographicWidth: function() {
+                // if comments are visible, the infographic should accomodate comment box space
+                if (this.getIsCommentsShowing() && $(window).width() > this.maxScreenWidthVisible) {
+                    $("#publish_page_container").css("width", $(window).width() - 400);
+                    $("#publish_page_container").css("display", "inline-block");
+                }
+                else { // default
+                    $("#publish_page_container").css("width", "auto");
+                    $("#publish_page_container").css("display", "block");
+                }
+            },
+            /**
+             * Get if send box is in focus
+             * @return bool if the input box for commenting is now in focus
+             */
+            getIsSendBoxInFocus: function() {
+                return this.isSendBoxInFocus;
+            },
+            /**
+             * Set if send box is in focus
+             * @param bool state The new state of whether the send box is in focus
+             */
+            setIsSendBoxInFocus: function(state) {
+                if (state !== false && state !== true) { return; }
+                this.isSendBoxInFocus = state;
+            },
+        };
+
+            } catch (e) {
+        console.log(e);
+    }
+</script>
+
+
+        </body>
+</html>
